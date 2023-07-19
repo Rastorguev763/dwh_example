@@ -1,0 +1,109 @@
+@startuml
+!define ENTITY(x) entity "x" as x << (E, #FFAAAA) >>
+!define RELATION(x) entity "x" as x << (R, #AAFFAA) >>
+
+package "Raw Layer" {
+ENTITY Sales {
+  + OrderID
+  SaleTime
+  ProductName
+  Price
+  Brand
+  Model
+  Category
+  CustomerCookies
+  TotalAmount
+}
+
+ENTITY CustomerAccounts {
+  + AccountID
+  CustomerCookies
+  FullName
+  Gender
+  DateOfBirth
+  Email
+  Phone
+}
+
+ENTITY Promotions {
+  + PromotionID
+  ProductID
+  StartDate
+  EndDate
+  DiscountSize
+}
+}
+
+package "Core Layer" {
+ENTITY Sales_Fact {
+  + OrderID
+  SaleTime
+  ProductID
+  CustomerID
+  PromotionID
+  TotalAmount
+}
+
+ENTITY Brands {
+  + BrandID
+Brand
+}
+
+ENTITY Models{
+  + ModelID
+Model
+}
+
+ENTITY Categorys{
+  + CategoryID
+Category
+}
+
+ENTITY Products {
+  + ProductID
+  ProductName
+  BrandID
+  ModelID
+  CategoryID
+}
+
+ENTITY Customers {
+  + CustomerID
+  AccountID
+  FullName
+  Gender
+  DateOfBirth
+  Email
+  Phone
+}
+
+
+"Sales_Fact" }o--|| "Products" : ProductID
+"Sales_Fact" }o--|| "Customers" : CustomerID
+"Products" }o--|| "Brands" : BrandID
+"Products" }o--|| "Models" : ModelID
+"Products" }o--|| "Categorys" : CategoryID
+}
+
+
+package "Mart Layer" {
+ENTITY CustomerSummary {
+  + AccountID
+  Gender
+  AgeCategory
+  Email
+  Phone
+}
+
+ENTITY CustomerPurchases {
+  AccountID
+  MostFrequentProductMonth
+  MostFrequentBrand
+  MostFrequentCategory
+  TotalAmountMonth
+  DiscountedItemCount
+}
+
+"CustomerPurchases" }o--|| "CustomerSummary" : AccountID
+}
+@enduml

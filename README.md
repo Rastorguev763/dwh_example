@@ -45,25 +45,40 @@
 
 ### Таблица "Sales_Fact":
 
-- OrderID
+- OrderID __PimaryKey__ (идентификатор покупки)
 - SaleTime
 - ProductID (ссылка на таблицу "Products" с уникальными идентификаторами товаров)
 - CustomerID (ссылка на таблицу "Customers" с уникальными идентификаторами покупателей)
 - PromotionID (ссылка на таблицу "Promotions" с уникальными идентификаторами промо-акций)
 - TotalAmount
 
+### Таблица "Brands":
+
+- BrandID __PimaryKey__ (идентификатор бренда продукта)
+- BrandName
+
+### Таблица "Models":
+
+- ModelID __PimaryKey__ (идентификатор модели продукта)
+- ModelName
+
+### Таблица "Categorys":
+
+- CategoryID __PimaryKey__ (идентификатор категории продукта)
+- CategoryName
+
 ### Таблица "Products":
 
-- ProductID
+- ProductID __PimaryKey__ (идентификатор продукта)
 - ProductName
-- Brand
-- Model
-- Category
+- BrandID (ссылка на таблицу "Brands" с уникальными идентификаторами бренда)
+- ModelID (ссылка на таблицу "Models" с уникальными идентификаторами модели)
+- CategoryID (ссылка на таблицу "Categorys" с уникальными идентификаторами категории)
 
 ### Таблица "Customers":
 
-- CustomerID
-- AccountID
+- CustomerID __PimaryKey__ (идентификатор покупателя)
+- AccountID 
 - FullName
 - Gender
 - DateOfBirth
